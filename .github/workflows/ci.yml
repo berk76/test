@@ -1,0 +1,16 @@
+name: ci-test
+
+on:
+  push:
+    tags:
+      - 'Version_*'
+
+jobs:
+  build:
+    name: Read Tag
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Print tag
+      run: echo ${{ github.ref }} | sed -n 's/.*Version_\(.*$\)/\1/p'
